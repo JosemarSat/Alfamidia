@@ -1,4 +1,4 @@
-# Alfamidia
+# Alfamidia / +praTI
 CRUD de pessoas/aluno no terminal usando somente JAVA
 Funcionalidades:
 - Criar pessoa/aluno
