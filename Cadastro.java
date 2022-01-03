@@ -59,6 +59,8 @@ public class Cadastro {
                 pessoa.setTelefone(telefone);
                 String dns="";
                 //verifica se a data digitada é válida
+                System.out.print("Data de Nascimento: (dd/mm/aaaa): ");
+                dns = ler.nextLine();
                 while (!checkData(dns)) {
                     System.out.print("Data de Nascimento: (dd/mm/aaaa): ");
                     dns = ler.nextLine();
@@ -389,7 +391,50 @@ public class Cadastro {
     }
     //rotina para verificar a validade da nota
     private static boolean checkData(String dns) {
+
         try {
+            Integer dia = Integer.parseInt(dns.substring(0,2));
+            Integer mes = Integer.parseInt(dns.substring(3,5));
+            Integer ano = Integer.parseInt(dns.substring(6,10));
+//            String mes = dns.substring(3, 5);
+//            String ano = dns.substring(6,10);
+            if (dia < 1 || dia > 31) {
+                System.out.println("Data inválida !!");
+                return false;
+            }
+
+            if (mes < 1 || mes > 12) {
+                System.out.println("Data inválida !!");
+                return false;
+            }
+            if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+                if (dia < 1 || dia > 30) {
+                    System.out.println("Mês só tem 30 dias. Data inválida !!");
+                    return false;
+                }
+            } else {
+                if (dia < 1 || dia > 31) {
+                    System.out.println("Data inválida !!");
+                    return false;
+                }
+            }
+            if (mes == 2) {
+                if (ano % 4 == 0 && (ano % 100 != 0 ) || ( ano % 400 == 0 )) {
+                    if (dia < 1 || dia > 29) {
+                        System.out.println("Data inválida !!");
+                        return false;
+                    }
+
+                }else if(dia < 1 || dia > 28) {
+                    System.out.println("Ano não é bissexto. Data inválida !!");
+                    return false;
+                }
+            }
+            if (ano < 1900 || ano > 2022) {
+                System.out.println("Data inválida !!");
+                return false;
+            }
+
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date data = formato.parse(dns);
             return true;
