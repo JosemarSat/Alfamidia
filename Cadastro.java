@@ -196,7 +196,6 @@ public class Cadastro {
 
         ler.close();
     }
-
     /*
      * Imprime a lista dos alunos cadastrados
      * @param listaAlunos
@@ -249,7 +248,6 @@ public class Cadastro {
     }
     /**
      * Alterar os dados das pessoas
-     *
      */
     public static void alterar(List<Pessoa> listaPessoas, int indice, String subst) {
         Scanner ler = new Scanner(System.in);
@@ -389,15 +387,14 @@ public class Cadastro {
             return false;
         }
     }
-    //rotina para verificar a validade da nota
+    //rotina para verificar a validade da data digitada
     private static boolean checkData(String dns) {
 
         try {
             Integer dia = Integer.parseInt(dns.substring(0,2));
             Integer mes = Integer.parseInt(dns.substring(3,5));
             Integer ano = Integer.parseInt(dns.substring(6,10));
-//            String mes = dns.substring(3, 5);
-//            String ano = dns.substring(6,10);
+
             if (dia < 1 || dia > 31) {
                 System.out.println("Data inválida !!");
                 return false;
