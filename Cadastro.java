@@ -14,7 +14,7 @@ public class Cadastro {
         dadosPessoas();
     }
 
-    public static void dadosPessoas()  {
+    public static void dadosPessoas() {
 
         Scanner ler = new Scanner(System.in);
         Pessoa pessoa;
@@ -41,11 +41,11 @@ public class Cadastro {
             System.out.print("Digite aqui sua opção: ");
             try {
                 opcao = Integer.parseInt(ler.nextLine());
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("Digite um número de 0 a 4 !!!");
             }
             System.out.println();
-            if(opcao == 1){
+            if (opcao == 1) {
                 //Cria um novo objeto
                 pessoa = new Pessoa();
                 aluno = new Aluno();
@@ -57,7 +57,7 @@ public class Cadastro {
                 System.out.print("Telefone: ");
                 String telefone = ler.nextLine();
                 pessoa.setTelefone(telefone);
-                String dns="";
+                String dns = "";
                 //verifica se a data digitada é válida
                 System.out.print("Data de Nascimento: (dd/mm/aaaa): ");
                 dns = ler.nextLine();
@@ -66,7 +66,7 @@ public class Cadastro {
                     dns = ler.nextLine();
                     pessoa.setDtaNasc(dns);
                 }
-                String dct="";
+                String dct = "";
                 while (!checkData(dct)) {
                     System.out.print("Data do cadastro: (dd/mm/aaaa): ");
                     dct = ler.nextLine();
@@ -102,41 +102,37 @@ public class Cadastro {
                 } else {
                     System.out.println("Cadastro não realizado");
                 }
-            } else if(opcao == 2) {
+            } else if (opcao == 2) {
                 //Alterar um registro
                 System.out.print("Digite o Nome para alterar: ");
                 busca = ler.nextLine();
-                System.out.println("Deseja alterar um [ A ] luno ou [ P ] essoa ?");
-                resp = ler.nextLine();
                 int indice;
-                if (resp.equalsIgnoreCase("A")) {
-                    for (int a = 0; a < listaAlunos.size(); a++) {
-                        indice = a;
-                        if (busca.equalsIgnoreCase(listaAlunos.get(a).getNome())) {
-                            imprimirAlunos(listaAlunos);
-                            alterarAluno(listaAlunos, indice, busca);
-                            break;
-                        } else {
-                            if (indice == (listaAlunos.size()-1)) {
-                                System.out.println("Aluno não cadastrado !");
-                            }
-                        }
-                    }
-                } else {
-                    for (int p = 0; p < listaPessoas.size(); p++) {
-                        indice = p;
-                        if (busca.equalsIgnoreCase(listaPessoas.get(p).getNome())) {
-                            imprimir(listaPessoas);
-                            alterar(listaPessoas, indice, busca);
-                            break;
-                        } else {
-                            if (indice == (listaPessoas.size()-1)) {
-                                System.out.println("Pessoa não cadastrada !");
-                            }
+
+                for (int a = 0; a < listaAlunos.size(); a++) {
+                    indice = a;
+                    if (busca.equalsIgnoreCase(listaAlunos.get(a).getNome())) {
+                        imprimirAlunos(listaAlunos);
+                        alterarAluno(listaAlunos, indice, busca);
+                        break;
+                    } else {
+                        if (indice == (listaAlunos.size() - 1)) {
+                            System.out.println("Aluno não cadastrado !");
                         }
                     }
                 }
-            } else if(opcao == 3) {
+                for (int p = 0; p < listaPessoas.size(); p++) {
+                    indice = p;
+                    if (busca.equalsIgnoreCase(listaPessoas.get(p).getNome())) {
+                        imprimir(listaPessoas);
+                        alterar(listaPessoas, indice, busca);
+                        break;
+                    } else {
+                        if (indice == (listaPessoas.size() - 1)) {
+                            System.out.println("Pessoa não cadastrada !");
+                        }
+                    }
+                }
+            } else if (opcao == 3) {
                 //Excluir um ítem cadastrado
                 System.out.print("Digite o Nome para Excluir: ");
                 String excluir = ler.nextLine();
@@ -144,7 +140,7 @@ public class Cadastro {
                 if (listaPessoas.isEmpty() && listaAlunos.isEmpty()) {
                     System.out.println("Não existem pessoas ou alunos cadastrados !!!");
                 }
-                for (int exa = 0; exa < listaAlunos.size(); exa++){
+                for (int exa = 0; exa < listaAlunos.size(); exa++) {
                     indice = exa;
                     if (listaAlunos.get(exa).getNome().equalsIgnoreCase(excluir)) {
                         System.out.println();
@@ -168,25 +164,25 @@ public class Cadastro {
                         if (confirma("exclusão")) {
                             listaPessoas.remove(indice);
                             System.out.print("Registro pessoal de " + excluir + " excluído!!!");
-                        }else {
+                        } else {
                             System.out.println(excluir + " não foi excluido(a) !!!");
                         }
                     } else {
                         System.out.println(excluir + " não está cadastrado(a) !!!");
                     }
                 }
-            }else if(opcao == 4) {
+            } else if (opcao == 4) {
                 //verifica se houve inserção de dados em um dos objetos criados e imprime o resultado
-                if (listaPessoas.isEmpty() && listaAlunos.isEmpty()){
+                if (listaPessoas.isEmpty() && listaAlunos.isEmpty()) {
                     System.out.println("Não existem pessoas cadastradas!!!");
-                }else{
+                } else {
                     if (!listaPessoas.isEmpty() || !listaAlunos.isEmpty()) {
                         imprimir(listaPessoas);
                         imprimirAlunos(listaAlunos);
                         //só chega aqui se houver inserção em um dos Arraylists
                     } else if (resp.equalsIgnoreCase("s")) {
                         imprimirAlunos(listaAlunos);
-                    }else
+                    } else
                         imprimir(listaPessoas);
                 }
                 System.out.println("Pressione qualquer tecla para continuar.");
@@ -196,21 +192,22 @@ public class Cadastro {
 
         ler.close();
     }
+
     /*
      * Imprime a lista dos alunos cadastrados
      * @param listaAlunos
      */
     private static void imprimirAlunos(List<Aluno> listaAlunos) {
-        for (int impA = 0; impA < listaAlunos.size();impA++) {
+        for (int impA = 0; impA < listaAlunos.size(); impA++) {
             if (impA == 0) {
                 System.out.println();
                 System.out.println("==========ALUNOS===========");
                 System.out.println("Nome: " + listaAlunos.get(impA).getNome());
                 System.out.println("Telefone: " + listaAlunos.get(impA).getTelefone());
-                System.out.println("Dta. Nascimento: " +listaAlunos.get(impA).getDtaNasc());
+                System.out.println("Dta. Nascimento: " + listaAlunos.get(impA).getDtaNasc());
                 System.out.println("Dta. Cadastro: " + listaAlunos.get(impA).getDtaCad());
                 System.out.println("Dta. Alteração: " + listaAlunos.get(impA).getDtaAlt());
-                System.out.println("Nota: "+ listaAlunos.get(impA).getNota());
+                System.out.println("Nota: " + listaAlunos.get(impA).getNota());
             } else {
                 System.out.println("===========================");
                 System.out.println("Nome: " + listaAlunos.get(impA).getNome());
@@ -218,22 +215,23 @@ public class Cadastro {
                 System.out.println("Dta. Nascimento: " + listaAlunos.get(impA).getDtaNasc());
                 System.out.println("Dta. Cadastro: " + listaAlunos.get(impA).getDtaCad());
                 System.out.println("Dta. Alteração: " + listaAlunos.get(impA).getDtaAlt());
-                System.out.println("Nota: "+ listaAlunos.get(impA).getNota());
+                System.out.println("Nota: " + listaAlunos.get(impA).getNota());
             }
         }
     }
+
     /*
      * Imprime a lista de pessoas cadastradas
      * @param listaPessoas
      */
     private static void imprimir(List<Pessoa> listaPessoas) {
-        for (int impP = 0; impP < listaPessoas.size();impP++) {
+        for (int impP = 0; impP < listaPessoas.size(); impP++) {
             if (impP == 0) {
                 System.out.println();
                 System.out.println("=========PESSOAS===========");
                 System.out.println("Nome: " + listaPessoas.get(impP).getNome());
                 System.out.println("Telefone: " + listaPessoas.get(impP).getTelefone());
-                System.out.println("Dta. Nascimento: " +listaPessoas.get(impP).getDtaNasc());
+                System.out.println("Dta. Nascimento: " + listaPessoas.get(impP).getDtaNasc());
                 System.out.println("Dta. Cadastro: " + listaPessoas.get(impP).getDtaCad());
                 System.out.println("Dta. Alteração: " + listaPessoas.get(impP).getDtaAlt());
             } else {
@@ -246,6 +244,7 @@ public class Cadastro {
             }
         }
     }
+
     /**
      * Alterar os dados das pessoas
      */
@@ -295,7 +294,8 @@ public class Cadastro {
             }
         }
     }
-     //Alterar os dados dos alunos
+
+    //Alterar os dados dos alunos
     public static void alterarAluno(List<Aluno> listaAlunos, int indice, String subst) {
         Scanner ler = new Scanner(System.in);
 
@@ -308,7 +308,7 @@ public class Cadastro {
             }
         }
         if (pergunta("telefone")) {
-            System.out.print(listaAlunos.get(indice).getTelefone() +" é o telefone atual. Digite o Novo número: ");
+            System.out.print(listaAlunos.get(indice).getTelefone() + " é o telefone atual. Digite o Novo número: ");
             String fone = ler.nextLine();
 
             if (confirma("alteração")) {
@@ -316,7 +316,7 @@ public class Cadastro {
             }
         }
         if (pergunta("Data de Nascimento")) {
-            System.out.print(listaAlunos.get(indice).getDtaNasc() +" é a data atual. Digite a nova Data: " );
+            System.out.print(listaAlunos.get(indice).getDtaNasc() + " é a data atual. Digite a nova Data: ");
             String dnas = ler.nextLine();
 
             if (confirma("alteração")) {
@@ -343,11 +343,11 @@ public class Cadastro {
             }
         }
         if (pergunta("Nota")) {
-            System.out.print(listaAlunos.get(indice).getNota() +" nota atual. Digite a nova Nota: " );
-            Float nota=0F;
+            System.out.print(listaAlunos.get(indice).getNota() + " nota atual. Digite a nova Nota: ");
+            Float nota = 0F;
             try {
                 nota = Float.valueOf(ler.nextLine());
-            }catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("Erro na digitação da nota !!! ");
             }
 
@@ -357,6 +357,7 @@ public class Cadastro {
         }
 
     }
+
     //rotina auxiliar para verificar os campos que serão alterados
     public static boolean pergunta(String campo) {
         Scanner ler = new Scanner(System.in);
@@ -371,7 +372,8 @@ public class Cadastro {
             return false;
         }
     }
-     //rotina auxiliar para confirmação de operação
+
+    //rotina auxiliar para confirmação de operação
     public static boolean confirma(String opcao) {
         Scanner ler = new Scanner(System.in);
         String resp;
@@ -387,13 +389,14 @@ public class Cadastro {
             return false;
         }
     }
+
     //rotina para verificar a validade da data digitada
     private static boolean checkData(String dns) {
 
         try {
-            Integer dia = Integer.parseInt(dns.substring(0,2));
-            Integer mes = Integer.parseInt(dns.substring(3,5));
-            Integer ano = Integer.parseInt(dns.substring(6,10));
+            Integer dia = Integer.parseInt(dns.substring(0, 2));
+            Integer mes = Integer.parseInt(dns.substring(3, 5));
+            Integer ano = Integer.parseInt(dns.substring(6, 10));
 
             if (dia < 1 || dia > 31) {
                 System.out.println("Data inválida !!");
@@ -416,13 +419,13 @@ public class Cadastro {
                 }
             }
             if (mes == 2) {
-                if (ano % 4 == 0 && (ano % 100 != 0 ) || ( ano % 400 == 0 )) {
+                if (ano % 4 == 0 && (ano % 100 != 0) || (ano % 400 == 0)) {
                     if (dia < 1 || dia > 29) {
                         System.out.println("Data inválida !!");
                         return false;
                     }
 
-                }else if(dia < 1 || dia > 28) {
+                } else if (dia < 1 || dia > 28) {
                     System.out.println("Ano não é bissexto. Data inválida !!");
                     return false;
                 }
