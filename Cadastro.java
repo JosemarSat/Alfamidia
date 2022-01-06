@@ -1,3 +1,4 @@
+
 /*
  * Classe Cadastro
  * Autor Josemar Sátiro
@@ -443,4 +444,5 @@ public class Cadastro {
         }
     }
 }
+
 
