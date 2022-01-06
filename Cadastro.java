@@ -108,7 +108,7 @@ public class Cadastro {
                 System.out.print("Digite o Nome para alterar: ");
                 busca = ler.nextLine();
                 int indice;
-
+                //verifica o nome procurado nos dois ArrayList
                 for (int a = 0; a < listaAlunos.size(); a++) {
                     indice = a;
                     if (busca.equalsIgnoreCase(listaAlunos.get(a).getNome())) {
